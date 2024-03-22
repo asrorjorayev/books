@@ -29,12 +29,9 @@ class RegisterForm(forms.ModelForm):
             raise forms.ValidationError('username uzunligi 5 dan katta 30 dan kichik bolishi kerakl')
         return username
 
-class LoginForm(forms.ModelForm):
-    def __init__(self,*args,**kwargs):
-        super(LoginForm,self).__init__(*args,**kwargs)
-    class Meta:
-        model=User
-        fields=['username','password']
+class LoginForm(forms.Form):
+    username=forms.CharField()
+    password=forms.CharField(widget=forms.PasswordInput)
 
     def clean_username(self):
         username=self.cleaned_data['username']

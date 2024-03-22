@@ -21,5 +21,6 @@ from .vievs import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',landing_page,name='landing'),
-    path('',include('users.urls'))
+    path('',include('users.urls')),
+    path('',include('places.urls')),
 ]

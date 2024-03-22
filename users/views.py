@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from django.views import View
+from django.contrib.auth import authenticate,login,logout
 from .forms import RegisterForm,LoginForm
 # Create your views here.
 class RegisterViev(View):
@@ -25,6 +26,15 @@ class LoginViev(View):
     def post(self,request):
         form=LoginForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('users:register')
+             username=form.cleaned_data['username']
+             password=form.cleaned_data['password']
+             user=authenticate(username=username,password=password)
+             if user is not None:
+                 login(request,user)
+                 return redirect('landing')
         return render(request,'users/login_page.html',context={"form":form})
+    
+class LogoutViev(View):
+    def get(self,request):
+        logout(request)
+        return redirect('landing')

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>places</title>
+</head>
+<body>
+    <h1>places</h1>
+    {% for place in places %}
+    <table>
+        <li>
+            <h2 class="">{{place.name}} 
+            <a href="{% url 'place:haqida_page' place.id %}">haqida</a>
+            </h2>    
+        </li>
+    </table>
+    {% endfor %}
+</body>
+</html>
