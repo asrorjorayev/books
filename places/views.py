@@ -14,7 +14,7 @@ def haqida(request,id):
     place=get_list_or_404(Places,pk=id)
     
     data={
-        'place':place
+        'places':place
     }
     return render(request,'haqida.html',context=data)
 
