@@ -1,18 +1,12 @@
 {% extends 'base.html'%}
 {% block content %}
-<title>Ro'yxatdan O'tish Sahifasi</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<title>Profile Sahifasi</title>
 <!-- stil berish -->
 <style>
     body {
         font-family: Arial, sans-serif;
         background-color: #f4f4f4;
         padding: 20px;
-    }
-
-    h2 {
-        text-align: center;
-        margin-bottom: 20px;
     }
 
     form {
@@ -24,9 +18,13 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
     input[type="text"],
-    input[type="password"],
-    input[type="email"] {
+    input[type="password"] {
         width: 100%;
         padding: 10px;
         margin-bottom: 15px;
@@ -48,11 +46,14 @@
         background-color: #0056b3;
     }
 </style>
-<!-- korinish -->
-<h2>Registratsiya Qilish</h2>
-<form action="" method="post" enctype="multipart/form-data">
+<h1>Profile</h1>
+<form action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Ro'yxatdan O'tish</button>
+    <button type="submit" class="btn btn-primary">Update</button>
 </form>
 {% endblock %}
+
+
+
+ 

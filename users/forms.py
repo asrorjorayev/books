@@ -46,3 +46,8 @@ class LoginForm(forms.Form):
         if not password.isdigit():
             raise forms.ValidationError('passwordni raqamda kiriting ')
         return password
+    
+class ProfileUpdateViev(forms.ModelForm):
+    class Meta:
+        model=User
+        fields=['username','first_name','last_name','email']

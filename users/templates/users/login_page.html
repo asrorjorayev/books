@@ -1,17 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> login_page</title>
-</head>
-<body>
-    <h1>login_page</h1>
-    <form  method="post">
-        {% csrf_token %}
+{% extends 'base.html'%}
+{% block content %}
+ <title>Login Sahifasi</title>
+ <!-- stil berish -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
 
-        {{form.as_p}}
-        <button type="submit"> login</button>
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .register-link {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .register-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+ 
+    <h1>Login Sahifasi</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Login</button>
     </form>
-</body>
-</html>
+    <p class="text-center">Hali akkauntingiz yo'qmi? <a href="{% url 'users:register' %}" class="register-link">Ro'yxatdan o'tish</a></p>
+
+
+{% endblock %}

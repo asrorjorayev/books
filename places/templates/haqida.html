@@ -6,11 +6,15 @@
     <title>haqida</title>
 </head>
 <body>
-    <h1>haqida</h1>
-    <h1>{{place.discription}}
+ 
+
         {% for place in places %}
-        {{place.discription}}
+        <h1>{{place.name}}</h1>
+        <div>
+        <p>{{place.discription}}
+        </p>
+        </div>
         {% endfor %}
-        {{place.name}}</h1>
+
 </body>
 </html>
