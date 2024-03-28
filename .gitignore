@@ -1,4 +1,4 @@
-.vertual
+.venv
 # Django #
 *.log
 *.pot
@@ -100,12 +100,12 @@ celerybeat-schedule.*
 
 # Environments 
 .env 
-.vertual 
+.venv 
 env/ 
-vertual/ 
+venv/ 
 ENV/ 
 env.bak/ 
-vertual.bak/ 
+venv.bak/ 
 
 # mkdocs documentation 
 /site 

@@ -45,18 +45,23 @@ class LogoutViev(LoginRequiredMixin,View):
         return redirect('landing')
     
 
-class ProfileViev(View):
+class ProfileVievUpdate(LoginRequiredMixin,View):
     def get(self,request):
         form=ProfileUpdateViev(instance=request.user)
         return render(request,'users/profile.html',context={"form":form})
 
     def post(self,request):
-        form=ProfileUpdateViev(instance=request.user,data=request.POST)
+        form=ProfileUpdateViev(instance=request.user,data=request.POST,files=request.FILES)
 
         if form.is_valid():
             form.save()
             messages.info(request,"Siz muvaffaqiyatli yangilanish qildingiz ")
-            return redirect('landing')
+            return redirect('users:profile_viev')
         return render(request,'users/profile.html',context={"form":form})
+
+class Profile_viev(LoginRequiredMixin,View):
+    def get(self,request):
+
+        return render(request,'users/profile_viev.html')
 
         

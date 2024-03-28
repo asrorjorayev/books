@@ -1,5 +1,5 @@
 from typing import Any
-from django.contrib.auth.models import User
+from .models import User
 from django import forms
 
 class RegisterForm(forms.ModelForm):
@@ -50,4 +50,4 @@ class LoginForm(forms.Form):
 class ProfileUpdateViev(forms.ModelForm):
     class Meta:
         model=User
-        fields=['username','first_name','last_name','email']
+        fields=['image','username','first_name','last_name','email']
