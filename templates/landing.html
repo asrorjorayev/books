@@ -2,7 +2,49 @@
 {% block title%}
 {% endblock %}
 {% block content %}
-<body style="background-color: aliceblue;">
-    <img style="height: 100%; width: 100%;" src="https://i.pinimg.com/736x/d8/45/84/d84584e64ab8d30cbcbcd19269bd98c7.jpg" alt="">
-</body>
+    <!-- <img style="height: 100%; width: 100%;" src="https://i.pinimg.com/736x/d8/45/84/d84584e64ab8d30cbcbcd19269bd98c7.jpg" alt=""> -->
+    <!-- <div class="container posts-content">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card mb-4">
+                  <div class="card-body">
+                    <div class="media mb-3">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="d-block ui-w-40 rounded-circle" alt="">
+                      <div class="media-body ml-3">
+                        Kenneth Frazier
+                        <div class="text-muted small">3 days ago</div>
+                      </div>
+                    </div>
+                
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus finibus commodo bibendum. Vivamus laoreet blandit odio, vel finibus quam dictum ut.
+                    </p>
+                    <a href="javascript:void(0)" class="ui-rect ui-bg-cover" style="background-image: url('https://bootdey.com/img/Content/avatar/avatar3.png');"></a>
+                  </div>
+                  <div class="card-footer">
+                    <a href="javascript:void(0)" class="d-inline-block text-muted">
+                        <strong>123</strong> <small class="align-middle">Likes</small>
+                    </a>
+                    <a href="javascript:void(0)" class="d-inline-block text-muted ml-3">
+                        <strong>12</strong> <small class="align-middle">Comments</small>
+                    </a>
+                    <a href="javascript:void(0)" class="d-inline-block text-muted ml-3">
+                      <small class="align-middle">Repost</small>
+                    </a>
+                  </div>
+                </div>
+            </div> -->
+    
+    {% for izoh in place.izohlar.all %}
+    <div class=" row mt-2 mb-2">
+           <div class=" col-1 me-2">
+                   <img src="{{ izoh.user.image.url }}" alt="User photo" style="height: 100px; width: 100px; border-radius: 50%;"> 
+           </div>
+           <div class="col-7">
+                   <b>{{ izoh.user.username }}</b> read it {{izoh.stars_given}} stars given <i>{{ izoh.created_at }}</i>
+                   <p>{{ izoh.comment_text }}</p>
+           </div>
+    </div>
+    {% endfor %}
+ 
 {% endblock %}

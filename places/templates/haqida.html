@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-</head>
-<body style="background-color: antiquewhite;">
- 
-
+{% extends 'base.html'%}
+{% block content %}
         {% for place in places %}
         <h1>{{place.name}}</h1>
         <div>
@@ -15,7 +7,27 @@
         </p>
         </div>
         <img style="height: 50% ; width: 50%;" src="{{ place.image.url }}" alt="">
+        <form action="{% url 'place:Add_comment' place.id %}" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Saqlash</button>
+            </form>
+            
+        <p>
+                <h1>comments</h1>
+                {% for izoh in place.izohlar.all %}
+                         <div class=" row mt-2 mb-2">
+                                <div class=" col-1 me-2">
+                                        <img src="{{ izoh.user.image.url }}" alt="User photo" style="height: 100px; width: 100px; border-radius: 50%;"> 
+                                </div>
+                                <div class="col-7">
+                                        <b>{{ izoh.user.username }}</b> read it {{izoh.stars_given}} stars given <i>{{ izoh.created_at }}</i>
+                                        <p>{{ izoh.comment_text }}</p>
+                                </div>
+                         </div>
+                {% endfor %}
+        </p>
         {% endfor %}
+{% endblock %} 
 
-</body>
-</html>
+ 

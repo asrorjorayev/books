@@ -11,7 +11,7 @@ class RegisterViev(View):
         return render(request,'users/register.html',context={"form":form})
     
     def post(self,request):
-        form=RegisterForm(request.POST)
+        form=RegisterForm(request.POST,request.FILES)
         if form.is_valid():
             user=form.save(commit=False)
             user.set_password(form.cleaned_data['password'])

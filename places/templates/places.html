@@ -1,5 +1,13 @@
 {% extends 'base.html'%}
 {% block content %}
+            <div class="row mb-3">
+                <div class="col-4">
+                 <form action="" method="get" class="d-flex">
+                    <input type="text" class="form-control me-2 mb-2 " placeholder="search" name="q">
+                    <button class="btn btn-success">Search</button>
+                 </form>   
+                </div>
+            </div>
  {% if massages %}
   {% for massage in massages %}
  <p>{{massage}}</p>

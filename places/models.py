@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import User
+from django.utils import timezone
 from django.core.validators import MinValueValidator,MaxValueValidator
 
 class Places(models.Model):
@@ -29,8 +30,9 @@ class PlacesOwner(models.Model):
 
 class Comment(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
-    place=models.ForeignKey(Places,on_delete=models.CASCADE)
-    comment_text=models.TextField
+    place=models.ForeignKey(Places,on_delete=models.CASCADE,related_name="izohlar")
+    comment_text=models.TextField(null=True,blank=True)
     stars_given=models.IntegerField(validators=[MinValueValidator(1),MaxValueValidator(5)]) 
+    created_at=models.DateField(default=timezone.now)
     def __str__(self):
         return f"{self.user} comment to {self.place} and give {self.stars_given} stars"
