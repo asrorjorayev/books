@@ -31,7 +31,7 @@ class AddCommentViev(LoginRequiredMixin,View):
         form=PlaceCommentView(request.POST)
 
         if form.is_valid():
-            Comment.objects.create(
+           comment= Comment.objects.create(
                 user=request.user,
                 place=place,
                 comment_text=form.cleaned_data['comment_text'],

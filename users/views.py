@@ -4,6 +4,8 @@ from django.contrib.auth import authenticate,login,logout
 from .forms import RegisterForm,LoginForm,ProfileUpdateViev
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.hashers import check_password
+from .forms import ResetPasswordViev
 # Create your views here.
 class RegisterViev(View):
     def get(self,request):
@@ -64,4 +66,23 @@ class Profile_viev(LoginRequiredMixin,View):
 
         return render(request,'users/profile_viev.html')
 
-        
+class ResetPassword(LoginRequiredMixin,View):
+    def get(self,request):
+        form=ResetPasswordViev()
+        return render(request,'users/reset_password.html',context={"form":form})
+    
+    def post(self,request):
+        user=request.user
+        form=ResetPasswordViev(request.POST)
+        if form.is_valid():
+            if check_parol(user,form.cleaned_data['old_password']):
+                user.set_password(form.cleaned_data['confirm_password'])
+                user.save()
+                return redirect('users:profile_viev')
+            else:
+                return render(request,'users/reset_password.html',context={"form":form})
+    
+        return render(request,'users/reset_password.html',context={"form":form})
+
+def check_parol(user,password):
+    return user.check_password(password)

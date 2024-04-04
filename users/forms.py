@@ -51,3 +51,16 @@ class ProfileUpdateViev(forms.ModelForm):
     class Meta:
         model=User
         fields=['image','username','first_name','last_name','email']
+
+class ResetPasswordViev(forms.Form):
+    old_password=forms.CharField(widget=forms.PasswordInput)
+    new_password=forms.CharField(widget=forms.PasswordInput)
+    confirm_password=forms.CharField(widget=forms.PasswordInput)
+
+    def clean(self):
+        new_password=self.cleaned_data['new_password']
+        confirm_password=self.cleaned_data['confirm_password']
+
+        if new_password!=confirm_password:
+            raise forms.ValidationError(" parollar mos emas ")
+        return self.cleaned_data

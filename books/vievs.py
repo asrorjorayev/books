@@ -14,3 +14,8 @@ def  landing_page(request):
         'form':form
     }
     return render(request,'landing.html',context=data)
+
+class HomeView(LoginRequiredMixin,View):
+    def get(self,request):
+        place_reviews=Comment.objects.exclude(user=request.user)
+        return render(request,'home.html',{"place_reviews":place_reviews})
