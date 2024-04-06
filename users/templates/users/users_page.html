@@ -1,0 +1,72 @@
+{% extends 'base.html'%}
+{% block content %}
+<title>Profile Sahifasi</title>
+<!-- stil berish -->
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        padding: 20px;
+    }
+
+    form {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+</style>
+<h1>User page</h1>
+{% for friend in users %}
+<div class="row">
+    <div class="col-1">
+        <img src="{{ friend.image.url }}" alt=" users image"  style="height: 100px; width: 100px; border-radius: 50%; margin-bottom: 50px;">
+    </div>
+    <div class="col-6">
+        <p><b>{{ friend.username }}</b></p>
+        <p>{{ friend.email }}</p>
+    </div>
+    <div class="col">
+        {% if friend in friend_request %}
+        <button class="btn btn-outline-primary" disabled>sent</button>
+        {% else %}
+        <a href="{% url 'users:send_request' friend.id  %}" class="btn btn-outline-primary">So'rov yuborish</a>
+        {% endif %}
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
+
+
+
+ 

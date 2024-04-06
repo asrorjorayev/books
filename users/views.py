@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.hashers import check_password
 from .forms import ResetPasswordViev
+from .models import *
 # Create your views here.
 class RegisterViev(View):
     def get(self,request):
@@ -86,3 +87,50 @@ class ResetPassword(LoginRequiredMixin,View):
 
 def check_parol(user,password):
     return user.check_password(password)
+
+class UserView(LoginRequiredMixin,View):
+    def get(self,request):
+        users=User.objects.exclude(username=request.user.username)
+        friend_request=User.objects.filter(id__in=FriendRequest.objects.filter(from_user=request.user).values_list('to_user'))
+
+        return render(request,'users/users_page.html',{"users":users,"friend_request":friend_request})
+    
+class MyNetworks(LoginRequiredMixin,View):
+    def get(self,request):
+        networks=FriendRequest.objects.filter(to_user=request.user,is_accepted=False)
+        return render(request,'networks.html',{"networks":networks})
+    
+
+    
+class FriendRequestView(LoginRequiredMixin,View):
+    def get(self,request,id):
+        to_user=User.objects.get(id=id)
+        from_user=request.user
+        FriendRequest.objects.get_or_create(from_user=from_user,to_user=to_user)
+
+        return redirect('users:user_page')
+    
+class AcceptFriendRequestView(LoginRequiredMixin,View):
+    def get(self,request,id):
+        friend_rquest=FriendRequest.objects.get(id=id)
+        from_user=friend_rquest.from_user
+
+        main_user=request.user
+        main_user.friends.add(from_user)
+
+        return redirect('users:networks_page')
+
+class IgnoreFriendView(LoginRequiredMixin,View):
+    def get(self,request,id):
+        friend_request=FriendRequest.objects.get(id=id)
+        friend_request.delete()
+        return redirect('users:networks_page')
+    
+class DeleteFriendView(LoginRequiredMixin,View):
+    def get(self,request,id):
+        friend=User.objects.get(id=id)
+        user=request.user
+        user.friends.remove(friend)
+        return redirect('users:networks_page')
+
+    

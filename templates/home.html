@@ -5,6 +5,7 @@
   <div class="row justify-content-center"> <!-- Centering the content horizontally -->
     <div class="col-lg-6">
         {% for review in place_reviews %}
+         
           <div class="card mb-4" style="border: 1px solid rgba(24,28,33,0.06);">
         <div class="card-body">
           <div class="media mb-3">
@@ -29,10 +30,11 @@
             <strong>12</strong> <small class="align-middle">Comments</small>
           </a>
           <a href="javascript:void(0)" class="d-inline-block text-muted ml-3">
-            <small class="align-middle">Repost</small>
+            <small class="align-middle"><h1>{{ friend }}</h1></small>
           </a>
         </div>
       </div>
+      
         {% endfor %}
 
 

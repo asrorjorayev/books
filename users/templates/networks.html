@@ -1,0 +1,86 @@
+{% extends 'base.html'%}
+{% block content %}
+<title>Profile Sahifasi</title>
+<!-- stil berish -->
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        padding: 20px;
+    }
+
+    form {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+</style>
+<h1>Networks</h1>
+{% for network in networks %}
+<div class="row">
+    <div class="col-1">
+        <img src="{{ network.from_user.image.url }}" alt=" users image"  style="height: 100px; width: 100px; border-radius: 50%; margin-bottom: 50px;">
+    </div>
+    <div class="col-6">
+        <p><b>{{ network.from_user.username }}</b></p>
+        <p>{{ network.from_user.email }}</p>
+    </div>
+    <div class="col">
+        <a href="{% url 'users:ignore' network.id %}" class="btn btn-outline-secondary ">Bekor qilish</a>
+        <a href="{% url 'users:accept' network.id %}" class="btn btn-outline-primary">Qabul qilish</a>
+    </div>
+</div>
+{% endfor %}
+
+
+<h1>Dostlar</h1>
+{% for friend in user.friends.all %}
+<div class="row">
+    <div class="col-1">
+        <img src="{{ friend.image.url }}" alt=" users image"  style="height: 100px; width: 100px; border-radius: 50%; margin-bottom: 50px;">
+    </div>
+    <div class="col-6">
+        <p><b>{{ friend.username }}</b></p>
+        <p>{{ friend.email }}</p>
+    </div>
+    <div class="col">
+        <a href="{% url 'users:delete_friend' friend.id %}" class="btn btn-outline-danger">Delete</a>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
+
+
+
+ 
