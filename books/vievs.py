@@ -18,7 +18,7 @@ def  landing_page(request):
 
 class HomeView(LoginRequiredMixin,View):
     def get(self,request):
-         
-        place_reviews = Comment.objects.filter(user__in=request.user.friends.all()).order_by('-created_at')
+        MAX_COMMENTS = 2
+        place_reviews = Comment.objects.filter(user__in=request.user.friends.all()).order_by('-created_at')[:MAX_COMMENTS]
         
         return render(request,'home.html',{"place_reviews":place_reviews})

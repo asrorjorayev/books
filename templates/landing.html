@@ -2,41 +2,47 @@
 {% block title%}
 {% endblock %}
 {% block content %}
-    <img style="height: 100%; width: 100%;" src="https://i.pinimg.com/736x/d8/45/84/d84584e64ab8d30cbcbcd19269bd98c7.jpg" alt="">
-    {% for place in places %}
-    <div class="container posts-content"> 
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="card mb-4">
-                  <div class="card-body">
-                    <div class="media mb-3">
-                      <img src="{{ place.image.url }}"  alt="">
-                      <div class="media-body ml-3">
-                        {{place.name}}
-                        <div class="text-muted small">3 days ago</div>
-                      </div>
+<div style="background-color:darkslategrey;">
+  <img style="height: 100%; width: 100%;" src="https://i.pinimg.com/736x/d8/45/84/d84584e64ab8d30cbcbcd19269bd98c7.jpg" alt="">
+  {% for place in places %}
+  <div class="container posts-content" > 
+      <div class="row">
+          <div class="col-lg-6">
+              <div class="card mb-4" style="background-color:blanchedalmond;">
+                <div class="card-body">
+                  <div class="media mb-3">
+                    <img src="{{ place.image.url }}"  alt="">
+                    <div class="media-body ml-3">
+                      <h3><a class="btn btn-outline-primary" href="{% url 'place:haqida_page' place.id %}">{{ place.name }}</a></h3>
+                      <div class="text-muted small">3 days ago</div>
                     </div>
-
-                    <p>
-                        {{place.discription|truncatewords:10}}
-                    </p>
-                    <a href="javascript:void(0)" class="ui-rect ui-bg-cover" style="background-image: url('https://bootdey.com/img/Content/avatar/avatar3.png');"></a>
                   </div>
-                  <div class="card-footer">
-                    <a href="javascript:void(0)" class="d-inline-block text-muted">
-                        <strong> </strong> <small class="align-middle">Likes</small>
-                    </a>
-                    <a href="javascript:void(0)" class="d-inline-block text-muted ml-3">
-                        {% for izoh in place.izohlar.all %}
+
+                  <p>
+                      {{place.discription|truncatewords:10}}
+                  </p>
+                  <a href="javascript:void(0)" class="ui-rect ui-bg-cover" style="background-image: url('https://bootdey.com/img/Content/avatar/avatar3.png');"></a>
+                </div>
+                <div class="card-footer" style="background-color:burlywood">
+                  <a href="javascript:void(0)" class="d-inline-block text-muted">
+                      <strong> </strong> <small class="align-middle">comments</small>
+                  </a>
+                  <a href="javascript:void(0)" class="d-inline-block text-muted ml-3">
+                    {% for izoh in place.izohlar.all %}
+                    {% if forloop.revcounter < 4 %}
                         <img src="{{ izoh.user.image.url }}" alt="User photo" style="height: 40px; width: 40px; border-radius: 50%;">             
                         <strong>{{ izoh.user.username }}</strong><small class="align-middle">{{ izoh.comment_text }}</small>
-                        {% endfor %}
-                    </a>
-                    <a href="javascript:void(0)" class="d-inline-block text-muted ml-3">
-                      
-                    </a>
-                  </div>
+                    {% endif %}
+                  {% endfor %}
+
+                
+                  </a>
+                  <a href="javascript:void(0)" class="d-inline-block text-muted ml-3">
+                    
+                  </a>
                 </div>
-            </div>
+              </div>
+          </div>
+</div>
             {% endfor %}
 {% endblock %}

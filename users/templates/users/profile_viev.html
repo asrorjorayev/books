@@ -1,7 +1,7 @@
-{% extends 'base.html'%}
+{% extends 'base.html' %}
 {% block content %}
 <title>Profile Sahifasi</title>
-<!-- stil berish -->
+<!-- Custom Styling -->
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -9,66 +9,75 @@
         padding: 20px;
     }
 
-    form {
-        max-width: 400px;
-        margin: 0 auto;
+    .profile-container {
+        background-color: beige;
+        width: 100%;
+        padding: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card {
+        padding: 50px;
         background-color: #fff;
-        padding: 20px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    h1 {
         text-align: center;
-        margin-bottom: 20px;
     }
 
-    input[type="text"],
-    input[type="password"] {
-        width: 100%;
-        padding: 10px;
+    .profile-image {
+        border-radius: 50%;
+        height: 200px;
+        width: 200px;
+    }
+
+    .profile-info {
+        margin-top: 30px;
+    }
+
+    .profile-info span {
+        display: block;
         margin-bottom: 15px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
+        font-size: 1.2em;
     }
 
-    .btn-primary {
+    .profile-info .number {
+        font-weight: bold;
+    }
+
+    .btn-outline-success,
+    .btn-outline-primary {
         width: 100%;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        background-color: #007bff;
-        color: #fff;
-        cursor: pointer;
+        margin-top: 15px;
+        padding: 15px;
+        font-size: 1.1em;
     }
 
-    .btn-primary:hover {
-        background-color: #0056b3;
+    .join-date {
+        margin-top: 30px;
+        font-size: 1.1em;
     }
 </style>
-<h1>Profile viev page</h1>
-<div style="background-color:beige; width: 100%;" class=" container mt-5 mb-4 p-5 d-flex justify-content-center">
-     <div class="card p-4"> 
-    <div style="height: 100%; width: 100%;" class=" image d-flex flex-column justify-content-center align-items-center"> 
-         <img style="border-radius: 50%;" src="{{ user.image.url }}" height="100" width="100" />
-        <span class="name mt-3">{{user.username}}</span> <span class="idd">{{user.email}}</span>
-         <div class="d-flex flex-row justify-content-center align-items-center gap-2">   
-            <span><i class="fa fa-copy"></i></span> </div> 
-            <div class="d-flex flex-row justify-content-center align-items-center mt-3"> 
-                <span class="number">
-                    <span class="follow">{{user.phone_num}} </span></span> </div> 
-                    <div class="d-flex flex-column mt-2">
-                        <a href="{% url 'users:profile' %}" class="btn btn-outline-success mb-2">Edit Profile</a>
-                        <a href="{% url  'users:reset_page' %}" class="btn btn-outline-primary">Reset password</a>
-                    </div>
-                    <div class="px-2 rounded mt-4 date">
-                        <span class="join">Joined {{user.date_joined|date:"M d, Y"}}</span>
-                    </div>
-                    
+
+<h1>Profile Viev Page</h1>
+<div class="profile-container mt-5 mb-4 p-5">
+    <div class="card p-4">
+        <div class="image d-flex flex-column justify-content-center align-items-center">
+            <img class="profile-image" src="{{ user.image.url }}" />
+            <div class="profile-info">
+                <span class="name">{{ user.username }}</span>
+                <span class="idd">{{ user.email }}</span>
+                <span class="number">{{ user.phone_num }}</span>
+                <div class="d-flex flex-column mt-2">
+                    <a href="{% url 'users:profile' %}" class="btn btn-outline-success mb-2">Edit Profile</a>
+                    <a href="{% url 'users:reset_page' %}" class="btn btn-outline-primary">Reset Password</a>
                 </div>
+                <div class="join-date px-2 rounded mt-4">
+                    <span class="join">Joined {{ user.date_joined|date:"M d, Y" }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
-
-
-
- 

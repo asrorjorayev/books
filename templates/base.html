@@ -12,8 +12,8 @@
 <body class="px-5">
     <nav class="navbar navbar-expand-lg navbar-light bg-danger">
         <div class="container-fluid">
-          <a class="navbar-brand" href="{% url 'landing' %}"><h5>landing</h5></a>
-          <a class="navbar-brand" href="{% url 'home'  %}"><h5>Home</h5></a>
+          <a class="navbar-brand" href="{% url 'landing' %}"><h5>home</h5></a>
+          <a class="navbar-brand" href="{% url 'home'  %}"><h5>friend</h5></a>
           <a class="navbar-brand" href="{% url 'users:user_page' %}"><h5>Users</h5></a>
           <a class="navbar-brand" href="{% url 'users:networks_page' %}"><h5>Networks</h5></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +40,9 @@
             <ul class="navbar-nav me-2 mb-2 mb-lg-0">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                     <h4> {{user.username}}</h4>
+                      <img src="{{ user.image.url }}" alt="image" style="height: 50px; width: 50px;border-radius: 50%;"><h4> {{user.username}}</h4></a>
+                     
+
                     </a>
                     {% if user.is_authenticated %}
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">

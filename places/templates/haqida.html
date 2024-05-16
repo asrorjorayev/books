@@ -15,17 +15,18 @@
                 
                 <p>
                         <h1>comments</h1>
-                        {% for izoh in place.izohlar.all %}
-                                <div class=" row mt-2 mb-2">
-                                        <div class=" col-1 me-2">
-                                                <img src="{{ izoh.user.image.url }}" alt="User photo" style="height: 100px; width: 100px; border-radius: 50%;"> 
-                                        </div>
-                                        <div class="col-7">
-                                                <b>{{ izoh.user.username }}</b> read it {{izoh.stars_given}} stars given <i>{{ izoh.created_at }}</i>
-                                                <p>{{ izoh.comment_text }}</p>
-                                        </div>
+                        {% for izoh in place.izohlar.all|slice:"-3:" %}
+                        <div class="row mt-2 mb-2">
+                                <div class="col-1 me-2">
+                                <img src="{{ izoh.user.image.url }}" alt="User photo" style="height: 100px; width: 100px; border-radius: 50%;"> 
                                 </div>
+                                <div class="col-7">
+                                <b>{{ izoh.user.username }}</b> read it {{ izoh.stars_given }} stars given <i>{{ izoh.created_at }}</i>
+                                <p>{{ izoh.comment_text }}</p>
+                                </div>
+                        </div>
                         {% endfor %}
+
                 </p>
                 {% endfor %}
 {% endblock %} 
